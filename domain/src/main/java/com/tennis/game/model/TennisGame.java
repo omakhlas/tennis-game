@@ -8,6 +8,11 @@ public class TennisGame {
         this.playerA = new Player("A");
         this.playerB = new Player("B");
     }
+
+    public String getScore() {
+        return "Player A : " + playerA.getScore().getPoints() + " / Player B : " + playerB.getScore().getPoints();
+    }
+
 }
 
 
