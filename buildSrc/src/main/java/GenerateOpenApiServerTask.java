@@ -41,17 +41,13 @@ public abstract class GenerateOpenApiServerTask extends DefaultTask {
                 .setModelNameSuffix("ApiDto")
                 .addAdditionalProperty("annotationLibrary", "none")
                 .addAdditionalProperty("documentationProvider", "none")
-                //.addAdditionalProperty("enumPropertyNaming", "UPPERCASE")
+                .addAdditionalProperty("serializationLibrary", "jackson")
                 .addAdditionalProperty("hideGenerationTimestamp", "true")
-                // .addAdditionalProperty("exceptionHandler", "false")
-                // .addAdditionalProperty("gradleBuildFile", "false")
                 .addAdditionalProperty("interfaceOnly", "true")
-                // .addAdditionalProperty("reactive", "false")
-                // addAdditionalProperty Des not exist
-                // .addAdditionalProperty("serializationLibrary", "jackson")
                 .addAdditionalProperty("useSpringBoot3", "true")
                 .addAdditionalProperty("useTags", "true")
                 .addAdditionalProperty("skipApiUtil", true)
+                .addAdditionalProperty("openApiNullable", false)
                 .setValidateSpec(false);
 
         try {
