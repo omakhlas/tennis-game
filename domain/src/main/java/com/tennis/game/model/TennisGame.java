@@ -16,6 +16,10 @@ public class TennisGame {
         return "Player A : " + playerA.getScore().getPoints() + " / Player B : " + playerB.getScore().getPoints();
     }
 
+    void pointScoredBy(Player player) {
+        player.nextScore();
+    }
+
 }
 
 

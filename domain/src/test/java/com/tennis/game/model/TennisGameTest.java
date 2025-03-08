@@ -18,5 +18,11 @@ public class TennisGameTest {
         TennisGame game = new TennisGame();
         game.pointScoredBy(game.getPlayerA());
         Assertions.assertThat(game.getScore()).isEqualTo("Player A : 15 / Player B : 0");
+        game.pointScoredBy(game.getPlayerA());
+        Assertions.assertThat(game.getScore()).isEqualTo("Player A : 30 / Player B : 0");
+        game.pointScoredBy(game.getPlayerA());
+        Assertions.assertThat(game.getScore()).isEqualTo("Player A : 40 / Player B : 0");
+        game.pointScoredBy(game.getPlayerB());
+        Assertions.assertThat(game.getScore()).isEqualTo("Player A : 40 / Player B : 15");
     }
 }

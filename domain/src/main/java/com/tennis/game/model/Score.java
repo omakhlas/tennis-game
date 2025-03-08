@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum Score {
     ZERO(0),
     FIFTEEN(15),
-    THIRTY(0),
-    FORTY(0);
+    THIRTY(30),
+    FORTY(40);
     private final int points;
 }
