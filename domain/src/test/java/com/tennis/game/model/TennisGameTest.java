@@ -4,6 +4,8 @@ package com.tennis.game.model;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.stream.IntStream;
+
 public class TennisGameTest {
 
     @Test
@@ -34,5 +36,22 @@ public class TennisGameTest {
         game.pointScoredBy(game.getPlayerA());
         game.pointScoredBy(game.getPlayerA());
         Assertions.assertThat(game.getScore()).isEqualTo("Player A wins the game");
+    }
+
+    @Test
+    public void Should_handle_advantage_when_both_players_score_40_points() {
+        TennisGame game = new TennisGame();
+        IntStream.range(0, 4).forEach(i -> {
+            game.pointScoredBy(game.getPlayerA());
+            game.pointScoredBy(game.getPlayerB());
+        });
+        // PlayerA score an advantage
+        game.pointScoredBy(game.getPlayerA());
+        Assertions.assertThat(game.getScore()).isEqualTo("Player A : advantage / Player B : 40");
+        game.pointScoredBy(game.getPlayerB());
+        Assertions.assertThat(game.getScore()).isEqualTo("Player A : 40 / Player B : 40");
+        game.pointScoredBy(game.getPlayerB());
+        game.pointScoredBy(game.getPlayerB());
+        Assertions.assertThat(game.getScore()).isEqualTo("Player B wins the game");
     }
 }
