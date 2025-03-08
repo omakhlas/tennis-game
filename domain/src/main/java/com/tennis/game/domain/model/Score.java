@@ -1,4 +1,4 @@
-package com.tennis.game.model;
+package com.tennis.game.domain.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

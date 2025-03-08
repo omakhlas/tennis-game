@@ -1,12 +1,12 @@
-package com.tennis.game.model;
+package com.tennis.game.domain.model;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import static com.tennis.game.model.Score.FIFTEEN;
-import static com.tennis.game.model.Score.FORTY;
-import static com.tennis.game.model.Score.THIRTY;
-import static com.tennis.game.model.Score.ZERO;
+import static com.tennis.game.domain.model.Score.FIFTEEN;
+import static com.tennis.game.domain.model.Score.FORTY;
+import static com.tennis.game.domain.model.Score.THIRTY;
+import static com.tennis.game.domain.model.Score.ZERO;
 
 @Getter
 public class Player {
