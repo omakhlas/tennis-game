@@ -25,4 +25,14 @@ public class TennisGameTest {
         game.pointScoredBy(game.getPlayerB());
         Assertions.assertThat(game.getScore()).isEqualTo("Player A : 40 / Player B : 15");
     }
+
+    @Test
+    public void playerA_should_win_a_normal_game() {
+        TennisGame game = new TennisGame();
+        game.pointScoredBy(game.getPlayerA());
+        game.pointScoredBy(game.getPlayerA());
+        game.pointScoredBy(game.getPlayerA());
+        game.pointScoredBy(game.getPlayerA());
+        Assertions.assertThat(game.getScore()).isEqualTo("Player A wins the game");
+    }
 }
