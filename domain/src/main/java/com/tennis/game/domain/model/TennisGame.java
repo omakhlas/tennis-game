@@ -1,9 +1,10 @@
-package com.tennis.game.model;
+package com.tennis.game.domain.model;
 
 import lombok.Getter;
 
 @Getter
 public class TennisGame {
+    private boolean gameEnded = false;
     private final Player playerA;
     private final Player playerB;
     private Player winner;
@@ -15,22 +16,30 @@ public class TennisGame {
     }
 
     public String getScore() {
-        if(winner != null) return "Player " + winner.getName() + " wins the game";
-        if(advantage != null) {
+        if (winner != null && !gameEnded) {
+            gameEnded = true;
+            return "Player " + winner.getName() + " wins the game";
+        }
+        if (advantage != null && !gameEnded) {
             return (advantage == playerA) ? "Player A : advantage / Player B : 40" : "Player A : 40 / Player B : advantage";
         }
-        return "Player A : " + playerA.getScore().getPoints() + " / Player B : " + playerB.getScore().getPoints();
+        if (!gameEnded) {
+            return "Player A : " + playerA.getScore().getPoints() + " / Player B : " + playerB.getScore().getPoints();
+        }
+        return null;
     }
 
-    void pointScoredBy(Player player) {
-        if(winner != null) return;
+    public void pointScoredBy(Player player) {
+
+        if (gameEnded) return;
+        if (winner != null) return;
 
         var opponent = getOpponent(player);
-        if(player.getScore() == Score.FORTY && opponent.getScore() == Score.FORTY) {
-            if(advantage == player) {
+        if (player.getScore() == Score.FORTY && opponent.getScore() == Score.FORTY) {
+            if (advantage == player) {
                 winner = player;
                 return;
-            } else if(advantage == opponent) {
+            } else if (advantage == opponent) {
                 advantage = null;
                 return;
             } else {
@@ -39,7 +48,7 @@ public class TennisGame {
             }
         }
 
-        if(player.getScore() == Score.FORTY) {
+        if (player.getScore() == Score.FORTY) {
             winner = player;
             return;
         }
@@ -47,7 +56,7 @@ public class TennisGame {
     }
 
     private Player getOpponent(Player player) {
-        return (player == playerA) ? playerB : playerA;
+        return player.getName().equals(playerA.getName()) ? playerB : playerA;
     }
 
 }
