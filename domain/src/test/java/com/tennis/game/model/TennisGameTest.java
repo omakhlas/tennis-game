@@ -12,4 +12,11 @@ public class TennisGameTest {
         var score = game.getScore();
         Assertions.assertThat(score).isEqualTo("Player A : 0 / Player B : 0");
     }
+
+    @Test
+    public void should_return_actual_score_when_the_thePlayers_score_some_points() {
+        TennisGame game = new TennisGame();
+        game.pointScoredBy(game.getPlayerA());
+        Assertions.assertThat(game.getScore()).isEqualTo("Player A : 15 / Player B : 0");
+    }
 }

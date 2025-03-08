@@ -1,5 +1,8 @@
 package com.tennis.game.model;
 
+import lombok.Getter;
+
+@Getter
 public class TennisGame {
     private final Player playerA;
     private final Player playerB;
