@@ -1,6 +1,8 @@
 package com.tennis.game.domain.usecase;
 
 import com.tennis.game.domain.DomainService;
+import com.tennis.game.domain.events.TennisScorePublisher;
+import com.tennis.game.domain.events.ScoreUpdatedEvent;
 import com.tennis.game.domain.model.Player;
 import com.tennis.game.domain.service.ITennisGameService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import java.util.List;
 public class TennisGameUseCase implements ITennisGameUseCase {
 
     private final ITennisGameService tennisGameService;
+    private final TennisScorePublisher tennisScorePublisher;
 
     @Override
     public List<String> playGame(String input) {
@@ -22,6 +25,7 @@ public class TennisGameUseCase implements ITennisGameUseCase {
             Player player = (c == 'A') ? tennisGameService.getPlayerA() : tennisGameService.getPlayerB();
             tennisGameService.pointScoredBy(player);
             String score = tennisGameService.getScore();
+            tennisScorePublisher.publish(new ScoreUpdatedEvent(score));
             if (score != null) {
                 result.add(score);
             }
