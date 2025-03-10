@@ -6,10 +6,12 @@ import com.tennis.game.domain.events.ScoreUpdatedEvent;
 import com.tennis.game.domain.model.Player;
 import com.tennis.game.domain.service.ITennisGameService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @DomainService
 public class TennisGameUseCase implements ITennisGameUseCase {
@@ -19,6 +21,7 @@ public class TennisGameUseCase implements ITennisGameUseCase {
 
     @Override
     public List<String> playGame(String input) {
+        log.info("Starting the game");
         tennisGameService.resetGame();
         var result = new ArrayList<String>();
         for (char c : input.toCharArray()) {
@@ -29,6 +32,7 @@ public class TennisGameUseCase implements ITennisGameUseCase {
             if (score != null) {
                 result.add(score);
             }
+            log.info("Current score: {}", score);
         }
         return result;
     }

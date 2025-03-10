@@ -10,21 +10,28 @@ public class TennisGame {
     private Player winner;
     private Player advantage;
 
+    private static final String PLAYER_A = "A";
+    private static final String PLAYER_B = "B";
+    private static final String WINS_MESSAGE = "Player %s wins the game";
+    private static final String SIMPLE_SCORE_MESSAGE = "Player A : %s / Player B : %s";
+    private static final String PLAYER_A_ADVANTAGE = "Player A : advantage / Player B : 40";
+    private static final String PLAYER_B_ADVANTAGE = "Player A : 40 / Player B : advantage";
+
     public TennisGame() {
-        this.playerA = new Player("A");
-        this.playerB = new Player("B");
+        this.playerA = new Player(PLAYER_A);
+        this.playerB = new Player(PLAYER_B);
     }
 
     public String getScore() {
         if (winner != null && !gameEnded) {
             gameEnded = true;
-            return "Player " + winner.getName() + " wins the game";
+            return String.format(WINS_MESSAGE, winner.getName());
         }
         if (advantage != null && !gameEnded) {
-            return (advantage == playerA) ? "Player A : advantage / Player B : 40" : "Player A : 40 / Player B : advantage";
+            return (advantage == playerA) ? PLAYER_A_ADVANTAGE : PLAYER_B_ADVANTAGE;
         }
         if (!gameEnded) {
-            return "Player A : " + playerA.getScore().getPoints() + " / Player B : " + playerB.getScore().getPoints();
+            return String.format(SIMPLE_SCORE_MESSAGE, playerA.getScore().getPoints(), playerB.getScore().getPoints());
         }
         return null;
     }
