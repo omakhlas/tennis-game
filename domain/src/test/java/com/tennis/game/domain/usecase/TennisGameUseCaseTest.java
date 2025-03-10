@@ -1,7 +1,6 @@
 package com.tennis.game.domain.usecase;
 
-import com.tennis.game.domain.model.Player;
-import com.tennis.game.domain.service.ITennisGameService;
+import com.tennis.game.domain.events.TennisScorePublisher;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,18 +9,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TennisGameUseCaseTest {
 
     @Mock
-    private ITennisGameService tennisGameService;
+    private TennisScorePublisher tennisScorePublisher;
 
     @InjectMocks
     private TennisGameUseCase tennisGameUseCase;
@@ -35,6 +28,7 @@ public class TennisGameUseCaseTest {
             "Player A : 40 / Player B : 40",
             "Player A : advantage / Player B : 40",
             "Player A : 40 / Player B : 40",
+            "Player A : 40 / Player B : advantage",
             "Player B wins the game"
     );
 
@@ -43,11 +37,7 @@ public class TennisGameUseCaseTest {
     void shouldPlayGameAndReturnScores() {
 
         // Given
-        String input = "ABABABABB";
-
-        when(tennisGameService.getPlayerA()).thenReturn(new Player("A"));
-        AtomicInteger counter = new AtomicInteger();
-        when(tennisGameService.getScore()).thenAnswer(invocation -> MOCK_SCORE.get(counter.getAndIncrement()));
+        String input = "ABABABABBB";
 
         // When
         var result = tennisGameUseCase.playGame(input);
@@ -55,8 +45,6 @@ public class TennisGameUseCaseTest {
         // Then
         Assertions.assertThat(result).containsExactlyElementsOf(MOCK_SCORE);
 
-        verify(tennisGameService, times(9)).pointScoredBy(any());
-        verify(tennisGameService, times(9)).getScore();
     }
 }
 

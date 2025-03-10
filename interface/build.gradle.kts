@@ -44,10 +44,10 @@ tasks.register<GenerateOpenApiServerTask>("openApiGenerateServer") {
     // this.specFile.set(openapiSpecFile.get().asFile)
     this.specFile.set(file("$projectDir/src/main/spec/tennis-game.yaml"))
     this.outputDir.set(generatedSourcesDir)
+    dependsOn("processResources")
 }
 
 // run openApiGenerate before compilation
 tasks.getByName("compileJava") {
     dependsOn("openApiGenerateServer")
 }
-

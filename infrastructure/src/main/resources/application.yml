@@ -2,7 +2,7 @@ spring:
   application:
     name: tennis-game
   kafka:
-    bootstrap-servers: YOUR_IP_ADDRESS:9092
+    bootstrap-servers: 192.168.11.105:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
