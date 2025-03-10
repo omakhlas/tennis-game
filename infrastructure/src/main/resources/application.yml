@@ -1,14 +1,18 @@
 spring:
+  application:
+    name: tennis-game
   kafka:
     bootstrap-servers: YOUR_IP_ADDRESS:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     consumer:
+      properties:
+        spring.json.trusted.packages: '*'
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       group-id: ${spring.application.name}
-      auto-offset-reset: earliest
+      auto-offset-reset: latest
 
 logging:
   level:
